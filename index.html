@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Amor 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 20px;
+    color: #333;
+  }
+
+  iframe {
+    border: none;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+
+.carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: contain;
+}
+
+
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    padding: 5px 10px;
+    border-radius: 50%;
+  }
+
+  .carousel-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .carousel-button.prev {
+    left: 10px;
+  }
+
+  .carousel-button.next {
+    right: 10px;
+  }
+
+  .counter {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+
+  .message {
+    padding: 20px;
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 0 10px 30px;
+    text-align: center;
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Player do Spotify -->
+  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1vm4XwSuGMywtOD7NbS2Rv?utm_source=generator" width="300" height="80" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<!-- Carrossel de imagens com setas -->
+<div class="carousel-container">
+  <button class="carousel-button prev" onclick="prevImage()">❮</button>
+  <div class="carousel-slide">
+    <img src="fotos/Foto 1.jpg" alt="Foto 1" class="carousel-image">
+    <img src="fotos/Foto 2.jpg" alt="Foto 2" class="carousel-image">
+    <img src="fotos/Foto 3.jpg" alt="Foto 3" class="carousel-image">
+    <img src="fotos/Foto 4.jpg" alt="Foto 4" class="carousel-image">
+    <!-- Adicione mais imagens se quiser -->
+  </div>
+  <button class="carousel-button next" onclick="nextImage()">❯</button>
+</div>
+
+
+  <!-- Contador de tempo de namoro -->
+  <div class="counter" id="counter">
+    Contando o nosso amor...
+  </div>
+
+  <!-- Mensagem personalizada -->
+  <div class="message">
+    <p>Desde o dia 13 de março de 2024, minha vida ficou mais colorida com você ao meu lado.  
+    Te amo mais a cada segundo. Feliz Dia dos Namorados, meu amor! 💘</p>
+  </div>
+
+  <script>
+    const startDate = new Date("2024-03-13T00:00:00");
+
+    function updateCounter() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
+
+      const years = Math.floor(diff / (365 * 24 * 3600));
+      diff %= 365 * 24 * 3600;
+      const months = Math.floor(diff / (30 * 24 * 3600));
+      diff %= 30 * 24 * 3600;
+      const days = Math.floor(diff / (24 * 3600));
+      diff %= 24 * 3600;
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      document.getElementById("counter").innerText = 
+        `${years} anos, ${months} meses, ${days} dias, ` +
+        `${hours} horas, ${minutes} minutos e ${seconds} segundos juntos 💖`;
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter();
+  </script>
+
+  <script>
+  let currentIndex = 0;
+  const slide = document.querySelector('.carousel-slide');
+  const images = document.querySelectorAll('.carousel-image');
+
+  function updateCarousel() {
+    const width = images[0].clientWidth;
+    slide.style.transform = `translateX(-${currentIndex * width}px)`;
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+    updateCarousel();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel();
+  }
+
+  window.addEventListener('resize', updateCarousel);
+  window.addEventListener('load', updateCarousel);
+</script>
+
+
+</body>
+</html>
